@@ -14,7 +14,7 @@ jobs:
 
     - name: Build, test tag, and push image to Amazon ECR
       env:
-        REGISTRY: ${{ steps.login-docker.outputs.registry }}
+        REGISTRY: ${{ secrets.DOCKER_HUB_USER_NAME }}
         REPOSITORY: ${{ secrets.DOCKER_HUB_REPOSITORY }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
@@ -24,5 +24,5 @@ jobs:
 
     - name: Logout of Docker Hub
       if: always()
-      run: docker logout ${{ steps.login-docker.outputs.registry }}
+      run: docker logout
 
